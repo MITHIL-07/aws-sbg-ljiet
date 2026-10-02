@@ -174,6 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const openPosterModal = (e) => {
     if (e) e.preventDefault();
     if (!posterModal) return;
+    
+    if (e && e.currentTarget) {
+      let img = null;
+      if (e.currentTarget.classList.contains('maximize-btn')) {
+        img = e.currentTarget.parentElement.querySelector('img');
+      } else {
+        img = e.currentTarget.querySelector('img');
+      }
+      
+      const modalImg = posterModal.querySelector('.pm-img');
+      if (img && modalImg) {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || "Full screen view";
+      }
+    }
+
     posterModal.classList.add('active');
     posterModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
