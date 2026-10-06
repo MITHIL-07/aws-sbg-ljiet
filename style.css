@@ -1327,20 +1327,28 @@ p {
   }
 
   /* ─── GALLERY ───────────────────────────────────────────────── */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--card-gap);
-    max-width: 800px;
-    margin: 0 auto;
-  }
+ .gallery-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: var(--card-gap);
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 12px;
+}
 
-  .gallery-item {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-m);
-    overflow: hidden;
-    background: var(--paper);
-  }
+.gallery-item {
+  flex: 0 0 calc(50% - 12px);   /* 2 photos visible on desktop */
+  scroll-snap-align: start;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  background: var(--paper);
+}
 
   .gallery-item .g-img {
     aspect-ratio: 4/3;
@@ -1892,10 +1900,6 @@ img[src*="Event"] {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .contact-layout {
     grid-template-columns: 1fr;
   }
@@ -2137,8 +2141,9 @@ img[src*="Event"] {
     width: 100%;
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
+ 
+  .gallery-item {
+    flex: 0 0 85%;   /* one photo at a time, next one peeks in */
   }
 
   .brand {
